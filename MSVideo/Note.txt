@@ -1,0 +1,22 @@
+the audio when it reach the end it will restart at the begining
+your record only save when you click 'Pause' button
+
+
+if buton = pause then it should not chaneg the title of audio
+same with video need to be fix
+
+
+btns = media libraly button
+play3 = play buton in audio
+
+when click btns if in play mode should save then play another one
+
+
+------------------------------
+add text to let people know to click pause to save their time = done
+update header time message = done
+add admin for Juli to able to add new user
+add header and total for admin
+
+-----------------------------
+mp3 in media folder are remove

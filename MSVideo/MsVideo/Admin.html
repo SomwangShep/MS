@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/tomorrow.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i|Montserrat:400,700" >
+		<link rel="shortcut icon" href="favicon.ico" />
+
+    <title>MS Balance Study</title>
+
+    <!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css"  type="text/css">
+		<link rel="stylesheet" type="text/css" href="css/MSVideo.css" />
+
+	</head>
+	<body background="../images/bg4.jpg">
+<!-- ========================Header================================== -->
+		<div class="container">
+		<div class="jumbotron" id="jumbo">
+		  <div class="row">
+		    <div class="col-sm-10">
+		    	<!-- header -->
+					<h2 class="text-primary" id="hd" class="msgBox"></h2>
+		    </div>
+		    <!-- logout -->
+		    <div  class="col-sm-2">
+		    	<button id="logOutBtn" type="button" class="btn btn-default btn-info">Logout</button>
+		    </div>
+		  </div><!--row-->
+		</div><!--jumbotron-->
+		</div><!--container-->
+		
+<!-- =====================Menu ========================== -->
+      <section id="faq-slide" class="inner-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 faqs-area">
+              <div id="accordion" role="tablist" aria-multiselectable="true">
+              	<!-- ==================== Report ====================-->
+                <div class="card">
+                  <div class="card-header" role="tab" id="headingOne">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      <h5 class="mb-0">Reports</h5>
+                    </a>
+                  </div>
+                  <div id="collapseOne" class="collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="card-block">
+                    	<p id="ad" ><a href="#">Admin</a></p>
+                    	<!-- Report detail -->
+											<table id="sourceTable" class="table table-hover table-condensed">
+												<tbody id="userTableBody"></tbody>
+											</table>
+											<!-- end Report detail-->
+                    </div>
+                  </div>
+                </div><!-- Card -->
+                <!-- ================== End Report ===================-->
+                
+                <!-- ==================== By Week ====================-->
+                <div class="card">
+                  <div class="card-header" role="tab" id="headingTwo">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      <h5 class="mb-0"> By Week </h5>
+                    </a>
+                  </div>
+                  <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="card-block">
+                    	<!-- Week detail -->
+											<table id="weekTable" class="table table-hover table-condensed">
+												<tbody id="weekTableBody"></tbody>
+											</table>
+											<!-- end Week detail-->
+                    </div>
+                  </div>
+                </div>
+                <!-- ================== End By Week ====================-->
+              </div><!-- accordion -->
+            </div><!-- col-md-3 faqs-area -->
+						<!-- ============== Detail at the right side ==============-->
+            <div class="col-md-9 slider">
+            <div class="jumbotron" id="jumbo3">
+						<table id="reportTable" class="table table-striped">
+							<h6 class="text-primary" id="hd2" class="msgBox"></h6>
+							<thead>
+								<tr id="ReportHeader" style="display: table-row;">
+									<th>Week #</th>
+									<th>Source Type</th>
+									<th>Title</th>
+									<th>Duration</th>
+								</tr>
+								<tr id="ReportHeaderAlt" style="display: none;">
+									<th>Name</th>
+									<th>Source Type</th>
+									<th>Title</th>
+									<th>Duration</th>
+								</tr>
+								<tr id="ReportHeaderAlt2" style="display: none;">
+									<th>Login id</th>
+									<th>First Name</th>
+									<th>LastName</th>
+									<th>Group</th>
+									<th>Edit</th>
+									<th>Delete</th>
+								</tr>								
+							</thead>
+							<tbody id="reportTableBodyAdmin"></tbody>
+						</table>
+						<p id="message" class="msgBox"></p>
+						<h6 class="text-primary" id="fd2" class="msgBox"></h6>
+						<button id="newBtn" type="button" class="btn btn-default btn-info">New</button>
+						<!-- user form -->
+						<form id="stateForm">
+							<input type="hidden" id="uid" name="uid"/>
+							<div class="form-group">
+								<label for="loginid">Login id</label>
+								<input type="text" class="form-control"
+									id="loginid" name="loginid" placeholder="Login id">
+							</div>
+							<div class="form-group">
+								<label for="fname">First Name</label>
+								<input type="text" class="form-control"
+									id="fname" name="fname" placeholder="First Name">
+							</div>
+							<div class="form-group">
+								<label for="lname">Last name</label>
+								<input type="text" class="form-control"
+									id="lname" name="lname" placeholder="Last name">
+							</div>
+							<div class="form-group">
+								<label for="group">Group</label>
+								<select id="group" name="group" class="form-control">
+							    <option value="audio">audio</option>
+							    <option value="video">video</option>
+							    <option value="admin">admin</option>
+							  </select>
+							</div>				
+							<button id="addBtn" type="button" class="btn btn-default btn-info">Save</button>
+							<button id="updBtn" type="button" class="btn btn-default btn-info">Update</button>
+							<button id="canBtn" type="button" class="btn btn-default btn-info">Cancel</button>
+						</form>
+						<!-- end user Form -->
+						</div><!-- jumbotron -->
+           	</div><!-- col-md-9 slider -->
+						<!-- =============End Detail at the right side =============-->
+          </div><!-- row -->
+          <hr style="margin: 0;" /> 
+          <div style="color: #0275d8;">&copy; 2017 Somwang Shepherd, Massachusetts College of Liberal Arts (MCLA) <a href="mailto:ss1792@mcla.edu">ss1792@mcla.edu</a></div>
+        </div><!-- container -->
+      </section>
+      
+<!-- ================ Hidden form to save record ======================= -->
+<!-- type="hidden" -->
+		<form id="adminForm">	
+		  <input type="hidden" id="weekN" name="weekN" style="width: 200px;"  title="week#" value="" />
+		  <input type="hidden" id="uid2" name="uid2" style="width: 200px;"  title="user id" value="" />
+		</form>
+
+<!--- =========================Dailog===================================-->
+	<div id="dlogs" class="modal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-body" style="text-align: center;">
+						<p id="dMessage" class="msgBox">Are you sure?</p>
+						<button id="yBtn" type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
+						<button id="nBtn" type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->	
+
+<!-- ================= end Dailog =================-->
+<!-- ============= custom local javascript ============================== -->
+		<script>
+
+		</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+	<script src="https://www.youtube.com/iframe_api"></script>
+	<script src="js/Admin.js"></script> 
+	<script src="js/jquery.min.js"></script>
+	<script src="js/tether.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="MsVideo/css/MSVideo.css" />
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    <!--<title>MS Video</title>-->
+    <title>MS Balance Study</title>
+
+    <!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <style>
+	</style>
+
+	</head>
+	<body background="images/bg4.jpg">
+		<!-- page content -->
+		<div class="container">
+			</br>
+			<div class="jumbotron" id="jumbo3">
+				<form id="loginForm" >
+
+				<!--	<p style="text-align: center;"><img src="images/UMASS_logo.png" style="max-width: 100%; height: auto;" alt="logo"></p> -->
+					<p style="text-align: center;"><img src="images/UMASS_logo2.png" alt="logo"></p>
+					<h2 class="mainpageTitle">Welcome to the MS Balance Study:
+					<br>Tai Chi & Mindfulness Meditation Home Practice Website!</h2>
+					
+					<p>Through this website you will be able to access your Tai Chi 
+					Videos or Mindfulness Meditation Podcasts 
+					(depending on your intervention), 
+					and will monitor your progress towards achieving your 
+					homework practice time goal!</p>
+					
+					<p>To get started, begin by entering your ID below then click the 
+					<strong>‘Login’</strong> button. If you do not have an ID, or need assistance 
+					with accessing content of this website please contact the 
+					person who provided this URL.</p>
+	
+					<div class="form-group" style="text-align: center;">
+					<!--	<p>This is some text. <img src="images/UMASS_logo.png" alt="Smiley face" width="42" height="42" align="left"> This is some text.</p> -->
+						<input type="text" class="form-control"	id="userID" name="userID" placeholder="user id" >
+						<button id="addBtn" type="button" class="btn btn-lg btn btn-danger">Login</button>
+					</div>
+				</form>
+				<p id="message"</p>
+				<hr style="margin: 0;" />&copy; 2017 Somwang Shepherd, Massachusetts College of Liberal Arts (MCLA) <a href="mailto:ss1792@mcla.edu">ss1792@mcla.edu</a>
+
+			</div>
+		</div>
+
+			
+		<!-- jquery and bootstrap -->
+		<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+		<!-- custom local javascript -->
+		<script>
+		    // model
+        	var model = [];
+			
+			// view 
+			function updateView()
+			{
+				if (model.error != undefined)
+				{
+					console.log("update view error");
+					$("#message").text(model.error);
+				}
+				else if(model.notFound != undefined)
+				{
+					console.log("update view notFound");
+					$("#message").text("Access Denined");					
+				}				
+				else
+				{
+					//doing something
+					console.log(model.length);
+					console.log("update view else, else");
+					var row = model[0];
+					console.log(row.sourceType);
+					if (row.sourcetype =="admin")
+					{
+						$("#message").html("Hello " + row.fname + ": "  + 
+						"<a href = MsVideo/Admin.html> Please click here to go to the next page");
+					}
+					else
+					{
+						$("#message").html("Hello " + row.fname + ": "  + 
+						"<a href = MsVideo/Source.html> Please click here to go to the next page");
+					}
+				}
+			}
+
+			// controller
+			$(document).ready(function ()
+			{
+				
+			});
+
+			$("#addBtn").click(function ()
+			{
+				sendCommand("login");
+            });
+            
+            function sendCommand(cmd)
+            {
+            	console.log("sendCommand");
+		    	var url = "MsVideo/MSVideo.php?cmd="+cmd;
+	            var data = $("#loginForm" ).serialize();
+                var request = $.post(url, data);
+                request.done(function(json)
+                {
+                	console.log(json);
+                    model = json;
+                    updateView();
+                });
+                request.fail(function(jqXHR, textStatus, errorThrown)
+                {
+                    $("#message").text("Error: "+ textStatus);
+                    console.log("fail object ", jqXHR);
+                    console.log("error thrown ", errorThrown);
+                    updateView();
+                });
+            }
+		</script>
+	</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/tomorrow.min.css">
+  <link rel="shortcut icon" href="favicon.ico" />
+
+  <title>MS Balance Study</title>
+
+  <!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/MSVideo.css" />
+
+</head>
+<body>
+	<!-- ========================Header================================== -->
+	<div class="container">
+	<div class="jumbotron" id="jumbo">
+	<!--<div class="jumbotron" id="jumbo" style="margin-bottom: 0;">-->
+	  <div class="row">
+	    <div class="col-sm-10">
+	    	<!-- header -->
+			<h2 class="text-primary" id="hd" class="msgBox"></h2>
+			<h3 class="text-primary" id="hd2" class="msgBox"></h3>
+			
+	    </div>
+	    <!-- logout -->
+	    <div  class="col-sm-2">
+	    	<button id="logOutBtn" type="button" class="btn btn-default btn-info">Logout</button>
+	    </div>
+	  </div><!--row-->
+	</div><!--jumbotron-->
+	</div><!--container-->
+
+	<!-- =========================Video================================= -->	
+	<div style="text-align:center" >  
+	<div class="container" >
+	  <div class="row">
+	    <div class="col-sm-10">
+	    	<!-- video -->
+	    	<p id="videofile2">Please select souce from Media Library</p>
+				<iframe id="video-placeholder"
+				    width="700" height="400"
+				    src="https://www.youtube.com/embed/?enablejsapi=1&rel=0"
+						frameborder="0" allowfullscreen
+				    style="border: solid 4px #37474F"
+				></iframe>
+				<p id="videoMSG" style = color:red>Note:The only ways that your time will be saved are when the video gets to the <em><strong>end</strong></em> or when you <em><strong>pause</strong></em> the video</p>
+				<!-- audio -->
+				<div id="au">
+			    <p>
+			    	<p id="audiofile2">Please select souce from Media Library</p>
+			    	<p style="text-align: center;"><img src="../images/MBSRLogo_3.jpg" alt="logo"></p>
+			      <input type="hidden" id="audiofile" size="60" value="" /> 
+			      <p><span id="current-time2">0:00</span> / <span id="duration2">0:00</span></p>
+			    </p>
+			    <audio id="myaudio">
+			      HTML5 audio not supported
+			    </audio>
+			    <button id="play3" type="button" class="btn btn-default btn-info" onclick="playAudio();">
+			      Play
+			    </button>
+			    <button id = "rewindebtn" type="button" class="btn btn-default btn-info" onclick="rewindAudio();">
+			      Rewind(-30s)
+			    </button>
+			    <button id = "forwardbtn" type="button" class="btn btn-default btn-info" onclick="forwardAudio();">
+			      Fast forward(+30s)
+			    </button>
+			    <button id = "restartbtn" type="button" class="btn btn-default btn-info" onclick="restartAudio();">
+			      Restart
+			    </button>
+			    <br>
+			    <p id="audioMSG" style = color:red>
+			    	Note:The only way that your time will be saved is when you click the <em><strong>pause</strong></em> button</p>
+			    <div id="audioMSG2" style = color:red>
+			    	(The <em><strong>pause</strong></em> and <em><strong>play</strong></em> are the same button - it will change to <em><strong>pause</strong></em> while playing)
+			    </div>
+			  </div><!-- end id="au" -->
+	    </div><!-- end class="col-sm-10" -->
+	    
+	    <!-- =========================graph================================= -->	
+	    Goal:</br>
+	    5 Hours
+	    <div id="ProgressChart" class="col-sm-2"></div>
+	    
+	  </div> <!-- end class="row" -->
+	</div>	<!-- end class="container" -->
+	</div> <!-- end style="text-align:center"  -->
+	
+	<div><p id="message" class="msgBox"></p></div>
+	<!-- ================= Media and History ============================== -->	
+	<div class="container">
+	  <div class="row">
+	  	<!-- -----------Source -------------- -->
+	    <div class="col-sm-6">
+				<table id="sourceTable" class="table table-striped">
+					<caption id="tableHD">Media Library</caption>
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Duration</th>
+					</tr>
+				</thead>
+					<tbody id="sourceTableBody"></tbody>
+				</table>
+	    </div>
+	    <!-- ---------View History ----------- -->
+	    <div class="col-sm-6">
+				<table id="reportTable" class="table table-striped">
+					<caption id="tableHD">Media View History</caption>
+				<thead>
+					<tr>
+						<th>Week #</th>
+						<th>Duration</th>
+					</tr>
+				</thead>
+					<tbody id="reportTableBody"></tbody>
+				</table>		
+				<p id="mediaMessage" class="msgBox"></p><!-- total -->
+	    </div>
+	  </div>
+	  <hr style="margin: 0;" />&copy; 2017 Somwang Shepherd, Massachusetts College of Liberal Arts (MCLA) <a href="mailto:ss1792@mcla.edu">ss1792@mcla.edu</a>
+	</div>		
+	<!-- ================ Hidden form to save record ======================= -->
+	<!-- type="hidden" -->
+	<form id="stateForm">	
+	  <input type="hidden" id="starts" name="starts" style="width: 200px;"  title="video start time" value="" />
+	  <input type="hidden" id="ends" name="ends" style="width: 200px;"  title="video end time" value="" />  
+	  <input type="hidden" id="sourceid" name="sourceid" style="width: 30px;"  title="video file input field" value="" />        
+	  <input type="hidden" id="timespend" name="timespend" style="width: 100px;"  title="total spend time" value="" />
+	  <input type="hidden" id="sourceT" name="sourceT" style="width: 100px;"  title="Source TYpe" value="" />
+	  <input type="hidden" id="weekN" name="weekN" style="width: 100px;"  title="Source TYpe" value="" />        
+	</form>  
+	
+	<!-- jquery and bootstrap -->
+	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	
+	<!--- =========================Dailog===================================-->
+	<div id="dlogs" class="modal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button id="cl" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	       <!-- <h4 class="modal-title">Modal title</h4>-->
+	        <p id="mTitle" class=""modal-title"">
+	      </div>
+	      <div class="modal-body">
+	        <table id="dailogTable" class="table table-striped">
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Title</th>
+								<th>Duration</th>
+							</tr>
+						</thead>
+						<tbody id="dailogTableBody">
+						</tbody>
+						</table>
+						<p id="dMessage" class="msgBox"></p>
+	      </div>
+	      <div class="modal-footer">
+	        <button id="closeBtn" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->	
+	
+	<!-- ============= custom local javascript ============================== -->
+	<script>
+	  // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+	</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script src="js/script.js"></script> 
+<script src="js/ms.js"></script> 
+<script src="js/audio.js"></script> 
+<script src="js/Dailog.js"></script>
+</body>
+</html>
